@@ -25,4 +25,22 @@ router.get("/one/:id", async (req, res, next) => {
   }
 });
 
+router.post("/new", async (req, res, next) => {
+  try {
+    const { nombre, email, telefono, producto, kindPay, state } = req.body;
+    const result = await modelDataOrden.addOne({
+      nombre,
+      email,
+      telefono,
+      producto,
+      kindPay,
+      state,
+    });
+    res.status(200).json(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ mensaje: "algo salio mal" });
+  }
+});
+
 module.exports = router;
