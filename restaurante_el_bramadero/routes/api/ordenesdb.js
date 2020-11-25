@@ -14,4 +14,15 @@ router.get("/all", async (req, res, next) => {
   }
 });
 
+router.get("/one/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await modelDataOrden.getOneById(id);
+    res.status(200).json(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ mensaje: "algo salio mal" });
+  }
+});
+
 module.exports = router;
